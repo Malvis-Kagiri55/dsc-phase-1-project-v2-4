@@ -2035,50 +2035,8 @@ y_axis
 
 
 ```python
-# Distibution of runtime data
-import seaborn as sns
-plt.figure(figsize=(8,7))
-sns.distplot(rt['runtime']);
-plt.title("Distribution plot of runtime of movies:");
-# plt.savefig('rt.runtime distribution.jpg')
-plt.show()
-```
-
-    C:\Users\kagir\anaconda3\envs\learn-env\lib\site-packages\seaborn\distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
-      warnings.warn(msg, FutureWarning)
-    
-
-
-    
-![png](output_52_1.png)
-    
-
-
-
-```python
 
 ```
-
-
-```python
-# Distribution of Average votes
-import seaborn as sns
-plt.figure(figsize=(8,7))
-sns.distplot(reviews['vote_average']);
-plt.title("Distribution plot of runtime of movies:");
-# plt.savefig('reviews.vote average distrbution.jpg')
-plt.show()
-```
-
-    C:\Users\kagir\anaconda3\envs\learn-env\lib\site-packages\seaborn\distributions.py:2551: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
-      warnings.warn(msg, FutureWarning)
-    
-
-
-    
-![png](output_54_1.png)
-    
-
 
 ## Analysis based on Original language of the movie
 
@@ -2112,7 +2070,7 @@ plt.show()
 
 
     
-![png](output_56_0.png)
+![png](output_54_0.png)
     
 
 
@@ -2157,7 +2115,7 @@ plt.show()
 
 
     
-![png](output_59_0.png)
+![png](output_57_0.png)
     
 
 
@@ -2183,24 +2141,6 @@ have a high approval among the target audience.
 ```
 
 ### Correlation of the data
-
-
-```python
-correlation = reviews.corr().round(2) # creating a 2-D Matrix with correlation plots
-correlation
-plt.figure(figsize = (15,8)) 
-plt.title("Data distribution among the various variables")
-sns.heatmap(correlation, annot=True, cmap='vlag_r', vmin=-1, vmax=1); 
-plt.savefig('correlation.jpg')
-
-#color palette
-```
-
-
-    
-![png](output_63_0.png)
-    
-
 
 ### Analysis based on Runtime
 
@@ -2229,7 +2169,7 @@ plt.show()
 
 
     
-![png](output_66_0.png)
+![png](output_63_0.png)
     
 
 
@@ -2248,7 +2188,7 @@ counts = rev.vote_count
 plt.figure(figsize=(14, 8))
 plt.scatter(lang, vote, cmap = cm.brg)
 plt.scatter(lang, counts, cmap = cm.brg)
-plt.xlabel("votes_counts", size=2)
+plt.xlabel("language", size=2)
 plt.ylabel("votes_avg", size=14)
 plt.tick_params(axis='x', which='major', labelsize=6)
 plt.show()
@@ -2256,7 +2196,7 @@ plt.show()
 
 
     
-![png](output_69_0.png)
+![png](output_66_0.png)
     
 
 
@@ -2307,63 +2247,11 @@ axs.set_ylabel('fequency')
 
 
     
-![png](output_71_1.png)
-    
-
-
-### Analysis based on budget and sales
-* showing the relationship between time in years and earnings(worldwide_gross) and budget(production_budget)
-
-
-```python
-import matplotlib.cm as cm
-y_axis = round(((budgets.worldwide_gross) / 100000000))
-l_axis = round(((budgets.production_budget) / 100000000))
-fig=plt.figure()
-ax=fig.add_axes([0,0,1,1])
-ax.scatter(bip, y_axis, cmap = cm.brg)
-ax.scatter(bip, l_axis, cmap = cm.brg)
-ax.set_xlabel('sales_range')
-ax.set_ylabel('movies')
-ax.set_title('scatter plot')
-
-plt.show()
-
-```
-
-
-    
-![png](output_73_0.png)
+![png](output_68_1.png)
     
 
 
 ### Analysis based on the Released Date("Year")
-
-
-```python
-fig, ax1 = plt.subplots(figsize=(8, 8))
-ax2 = ax1.twinx()
-
-ax1.barh(bip, y_axis, edgecolor="black", alpha=0.6)
-
-
-ax1.set_xlabel("sales")
-ax1.set_ylabel("years", fontsize=14)
-ax1.tick_params(axis="y")
-
-ax2.set_ylabel("Price ($)", fontsize=14)
-ax2.tick_params(axis="y")
-
-fig.autofmt_xdate()
-fig.suptitle("year vs movie", fontsize=20);
-
-```
-
-
-    
-![png](output_75_0.png)
-    
-
 
 ### Distribution of worldwide gross revenue and production budget
 
@@ -2386,7 +2274,7 @@ plt.show()
 
 
     
-![png](output_77_0.png)
+![png](output_71_0.png)
     
 
 
@@ -2409,7 +2297,7 @@ plt.show()
 
 
     
-![png](output_79_0.png)
+![png](output_73_0.png)
     
 
 
@@ -2430,59 +2318,11 @@ plt.show()
 
 
     
-![png](output_80_0.png)
+![png](output_74_0.png)
     
 
 
 ## Distribution of Languages based on frequency
-
-
-```python
-from matplotlib.ticker import PercentFormatter
-
-fig, axs = plt.subplots(1,1,figsize=(10,9),tight_layout=True)
-# Remove axes splines
-for s in ['top', 'bottom', 'left', 'right']:
-    axs.spines[s].set_visible(False)
- # Remove x, y ticks
-axs.xaxis.set_ticks_position('none')
-axs.yaxis.set_ticks_position('none')
-   
-# Add padding between axes and labels
-axs.xaxis.set_tick_params(pad = 5)
-axs.yaxis.set_tick_params(pad = 10)
- 
-# Add x, y gridlines
-axs.grid(b = True, color ='grey',
-        linestyle ='-.', linewidth = 0.5,
-        alpha = 0.6)
-
-N, bins, patches = axs.hist(x, edgecolor='black')
-# Setting color
-fracs = ((N**(1 / 5)) / N.max())
-norm = colors.Normalize(fracs.min(), fracs.max())
- 
-for thisfrac, thispatch in zip(fracs, patches):
-    color = plt.cm.viridis(norm(thisfrac))
-    thispatch.set_facecolor(color)
-axs.set_title('Movie Production Per Year')
-axs.set_xlabel('language')
-axs.set_ylabel('fequency')
-# plt.savefig('movie production in different years.jpg')
-```
-
-
-
-
-    Text(0, 0.5, 'fequency')
-
-
-
-
-    
-![png](output_82_1.png)
-    
-
 
 ## Movie Production Per Year
 
@@ -2505,36 +2345,11 @@ ax.set_ylabel('fequency')
 
 
     
-![png](output_84_1.png)
+![png](output_77_1.png)
     
 
 
 ## Rating vs vote count
-
-
-```python
-unique = rt.rating.unique()
-x_pos = np.arange(len(unique))
-count = counts.sample(7)
-# Create bars
-plt.bar(x_pos,count)
- 
-# Create names on the x-axis
-plt.xticks(x_pos, unique)
-
-# 
-plt.xlabel('Rating', fontweight='bold', color = 'orange', fontsize='18')
-# plt.savefig('ratings of movies depending on vote counts')
- 
-# Show graphic
-plt.show()
-```
-
-
-    
-![png](output_86_0.png)
-    
-
 
 ## Analysis Based on the Relationship between language, domestic gross and worldwide gross
 
@@ -2552,40 +2367,7 @@ sns.scatterplot(x = rt.rating, y = budgets.domestic_gross)
 
 
     
-![png](output_88_1.png)
-    
-
-
-
-```python
-sns.scatterplot(x = rt.rating, y = budgets.worldwide_gross)
-```
-
-
-
-
-    <AxesSubplot:xlabel='rating', ylabel='worldwide_gross'>
-
-
-
-
-    
-![png](output_89_1.png)
-    
-
-
-
-```python
-sns.scatterplot(x = lang, y = budgets.domestic_gross)
-plt.xlabel('language')
-plt.ylabel('revenue')
-# plt.savefig('lang vs rev.jpg')
-plt.show()  
-```
-
-
-    
-![png](output_90_0.png)
+![png](output_80_1.png)
     
 
 
@@ -2612,7 +2394,7 @@ plt.show()
 
 
     
-![png](output_91_0.png)
+![png](output_81_0.png)
     
 
 
@@ -2639,33 +2421,11 @@ plt.show()
 
 
     
-![png](output_92_0.png)
+![png](output_82_0.png)
     
 
 
 ## Relationship between rating and meta score
-
-
-```python
-y = net.IMDB_Rating.sample(40)
-x = net.Meta_score.sample(40)
-# plot
-plt.scatter(x, y, c="green", alpha=0.4, linewidth=6)
- 
-# Add titles (main and on axis)
-plt.xlabel("the X axis")
-plt.ylabel("the Y axis")
-plt.title("A bubble plot", loc="left")
-plt.savefig('bubble chart rating vs metascore.jpg')
-# show the graph
-plt.show()
-```
-
-
-    
-![png](output_94_0.png)
-    
-
 
 ## Relationship between rating and runtime
 
@@ -2690,11 +2450,18 @@ plt.show()
 
 
     
-![png](output_96_0.png)
+![png](output_85_0.png)
     
 
 
+# Recommendation
+* The longest movie should last 148 minutes.
+* Movies should be made with different markets in mind.
+* Languge used is a key factor in terms of sales given movies in English sell more than others.
+* Movie production in the last two decades has been an all time high.
 
-```python
 
-```
+
+
+#  Conclusion
+With movie production at an all time high in the last two decades even to this year, this is the perfect time to join the fun.
